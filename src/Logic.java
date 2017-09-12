@@ -32,9 +32,7 @@ public class Logic implements Runnable {
         for (int x = 0; x < 20; x++)
         {
             for (int y = 0; y < 10; y++)
-            {
                 System.out.print("'" + array[y][x] + "' ");
-            }
             System.out.println();
         }
         System.out.println("Done!");
@@ -53,10 +51,6 @@ public class Logic implements Runnable {
         return array[x][y];
     }
 
-    public synchronized char getFromArray(Square s) {
-        return array[s.x][s.y];
-    }
-
     public synchronized void setInArray(int x, int y, char symb)
     {
         array[x][y] = symb;
@@ -65,21 +59,6 @@ public class Logic implements Runnable {
     public synchronized void setInArray(Square s, char symb)
     {
         array[s.x][s.y] = symb;
-    }
-
-    public synchronized void setLose(boolean lose)
-    {
-        this.lose = lose;
-    }
-
-    public synchronized long getTiming()
-    {
-        return timing;
-    }
-
-    public synchronized void setTiming(long timing)
-    {
-        this.timing = timing;
     }
 
     public synchronized boolean getPause()
@@ -110,11 +89,9 @@ public class Logic implements Runnable {
                     }
                     synchronized (this)
                     {
-                        for (int x = 0; x < 10; x++) {
-                            for (int y = 0; y < 20; y++) {
+                        for (int x = 0; x < 10; x++)
+                            for (int y = 0; y < 20; y++)
                                 array[x][y] = ' ';
-                            }
-                        }
                         for (int i = 0; i < shapes.size(); i++) {
                             temp = shapes.get(i);
                             del = true;
@@ -162,33 +139,19 @@ public class Logic implements Runnable {
         switch (random.nextInt(7))
         {
             case (0) :
-            {
                 return I.getI();
-            }
             case (1) :
-            {
                 return O.getO();
-            }
             case (2) :
-            {
                 return S.getS();
-            }
             case (3) :
-            {
                 return Z.getZ();
-            }
             case (4) :
-            {
                 return T.getT();
-            }
             case (5) :
-            {
                 return J.getJ();
-            }
             default :
-            {
                 return L.getL();
-            }
         }
     }
 
@@ -200,63 +163,33 @@ public class Logic implements Runnable {
         {
             oneline = true;
             for (int x = 0; x < 10; x++)
-            {
                 if (array[x][y] == ' ')
                 {
                     oneline = false;
                     break;
                 }
-            }
             if (oneline)
-            {
                 count++;
-            }
             if (!oneline && count > 0)
             {
-                for (int y1 = y + count; count <= y1; y1--) {
-                    for (int x1 = 0; x1 < 10; x1++) {
+                for (int y1 = y + count; count <= y1; y1--)
+                    for (int x1 = 0; x1 < 10; x1++)
                         array[x1][y1] = array[x1][y1 - count];
-                    }
-                }
                 for (int y1 = y + count, i = 0; i < count; y1--, i++)
-                {
                     for (int x = 0; x < 10; x++)
-                    {
                         for (Shape s : shapes)
-                        {
                             for (Square sq : s.squares)
-                            {
                                 if (sq.x == x && sq.y == y1)
-                                {
                                     sq.y = 100;
-                                }
-                            }
-                        }
-                    }
-                }
                 for (int y1 = y; y1 > -1; y1--)
-                {
                     for (int x = 0; x < 10; x++)
-                    {
                         for (Shape s : shapes)
-                        {
                             for (Square sq : s.squares)
-                            {
                                 if (sq.x == x && sq.y == y1)
-                                {
                                     sq.y = sq.y + count;
-                                }
-                            }
-                        }
-                    }
-                }
                 for (int c = 0; c < count; c++)
-                {
                     for (int x = 0; x < 10; x++)
-                    {
                         array[x][c] = ' ';
-                    }
-                }
                 y += count;
                 score += count * 100;
                 score++;

@@ -136,7 +136,7 @@ public class Logic implements Runnable {
                     } catch (InterruptedException e) {
 
                     }
-
+                    GUI.gui.repaint();
                 }
                 while (fallen.down());
                 synchronized (this) {

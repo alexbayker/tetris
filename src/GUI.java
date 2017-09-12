@@ -22,17 +22,26 @@ public class GUI extends JComponent {
                     switch (evt.getKeyCode()) {
                         case KeyEvent.VK_RIGHT: {
                             if (!logic.getPause())
+                            {
                                 logic.fallen.right();
+                                gui.repaint();
+                            }
                             break;
                         }
                         case KeyEvent.VK_LEFT: {
                             if (!logic.getPause())
+                            {
                                 logic.fallen.left();
+                                gui.repaint();
+                            }
                             break;
                         }
                         case KeyEvent.VK_UP: {
                             if (!logic.getPause())
+                            {
                                 logic.fallen.move();
+                                gui.repaint();
+                            }
                             break;
                         }
                         case KeyEvent.VK_DOWN: {
@@ -42,6 +51,7 @@ public class GUI extends JComponent {
                                     int count = logic.fallen.stepsToDown();
                                     for (int i = 1; i < count; i++)
                                         logic.fallen.down();
+                                    gui.repaint();
                                 }
                             }
                             break;
@@ -59,84 +69,73 @@ public class GUI extends JComponent {
     }
     public void paintComponent(Graphics g)
     {
-
-        {
-                Graphics2D g2d = (Graphics2D) g;
-                for (int x = 0; x < 10; x++) {
-                    for (int y = 0; y < 20; y++) {
-                            if (logic.getFromArray(x, y) == ' ') {
-                                g2d.setPaint(Color.WHITE);
-                                g2d.fillRect(x * size, y * size, size, size);
-                                g2d.setPaint(Color.LIGHT_GRAY);
-                                g2d.drawRect(x * size, y * size, size, size);
-                            }
-                    }
+        Graphics2D g2d = (Graphics2D) g;
+        for (int x = 0; x < 10; x++) {
+            for (int y = 0; y < 20; y++) {
+                if (logic.getFromArray(x, y) == ' ') {
+                    g2d.setPaint(Color.WHITE);
+                    g2d.fillRect(x * size, y * size, size, size);
+                    g2d.setPaint(Color.LIGHT_GRAY);
+                    g2d.drawRect(x * size, y * size, size, size);
                 }
-                super.paintComponents(g);
-                super.repaint();
-                for (int x = 0; x < 10; x++) {
-                    for (int y = 0; y < 20; y++) {
-                        synchronized (logic) {
-                            switch (logic.getFromArray(x, y)) {
-
-                                case 'I': {
-                                    g2d.setPaint(Color.CYAN);
-                                    g2d.fillRect(x * size, y * size, size, size);
-                                    g2d.setPaint(Color.BLACK);
-                                    g2d.drawRect(x * size, y * size, size, size);
-                                    break;
-                                }
-                                case 'O': {
-                                    g2d.setPaint(Color.YELLOW);
-                                    g2d.fillRect(x * size, y * size, size, size);
-                                    g2d.setPaint(Color.BLACK);
-                                    g2d.drawRect(x * size, y * size, size, size);
-                                    break;
-                                }
-                                case 'S': {
-                                    g2d.setPaint(Color.GREEN);
-                                    g2d.fillRect(x * size, y * size, size, size);
-                                    g2d.setPaint(Color.BLACK);
-                                    g2d.drawRect(x * size, y * size, size, size);
-                                    break;
-                                }
-                                case 'Z': {
-                                    g2d.setPaint(Color.RED);
-                                    g2d.fillRect(x * size, y * size, size, size);
-                                    g2d.setPaint(Color.BLACK);
-                                    g2d.drawRect(x * size, y * size, size, size);
-                                    break;
-                                }
-                                case 'T': {
-                                    g2d.setPaint(Color.MAGENTA);
-                                    g2d.fillRect(x * size, y * size, size, size);
-                                    g2d.setPaint(Color.BLACK);
-                                    g2d.drawRect(x * size, y * size, size, size);
-                                    break;
-                                }
-                                case 'L': {
-                                    g2d.setPaint(Color.ORANGE);
-                                    g2d.fillRect(x * size, y * size, size, size);
-                                    g2d.setPaint(Color.BLACK);
-                                    g2d.drawRect(x * size, y * size, size, size);
-                                    break;
-                                }
-                                case 'J': {
-                                    g2d.setPaint(Color.BLUE);
-                                    g2d.fillRect(x * size, y * size, size, size);
-                                    g2d.setPaint(Color.BLACK);
-                                    g2d.drawRect(x * size, y * size, size, size);
-                                    break;
-                                }
-
-                            }
+            }
+        }
+        for (int x = 0; x < 10; x++) {
+            for (int y = 0; y < 20; y++) {
+                synchronized (logic) {
+                    switch (logic.getFromArray(x, y)) {
+                        case 'I': {
+                            g2d.setPaint(Color.CYAN);
+                            g2d.fillRect(x * size, y * size, size, size);
+                            g2d.setPaint(Color.BLACK);
+                            g2d.drawRect(x * size, y * size, size, size);
+                            break;
+                        }
+                        case 'O': {
+                            g2d.setPaint(Color.YELLOW);
+                            g2d.fillRect(x * size, y * size, size, size);
+                            g2d.setPaint(Color.BLACK);
+                            g2d.drawRect(x * size, y * size, size, size);
+                            break;
+                        }
+                        case 'S': {
+                            g2d.setPaint(Color.GREEN);
+                            g2d.fillRect(x * size, y * size, size, size);
+                            g2d.setPaint(Color.BLACK);
+                            g2d.drawRect(x * size, y * size, size, size);
+                            break;
+                        }
+                        case 'Z': {
+                            g2d.setPaint(Color.RED);
+                            g2d.fillRect(x * size, y * size, size, size);
+                            g2d.setPaint(Color.BLACK);
+                            g2d.drawRect(x * size, y * size, size, size);
+                            break;
+                        }
+                        case 'T': {
+                            g2d.setPaint(Color.MAGENTA);
+                            g2d.fillRect(x * size, y * size, size, size);
+                            g2d.setPaint(Color.BLACK);
+                            g2d.drawRect(x * size, y * size, size, size);
+                            break;
+                        }
+                        case 'L': {
+                            g2d.setPaint(Color.ORANGE);
+                            g2d.fillRect(x * size, y * size, size, size);
+                            g2d.setPaint(Color.BLACK);
+                            g2d.drawRect(x * size, y * size, size, size);
+                            break;
+                        }
+                        case 'J': {
+                            g2d.setPaint(Color.BLUE);
+                            g2d.fillRect(x * size, y * size, size, size);
+                            g2d.setPaint(Color.BLACK);
+                            g2d.drawRect(x * size, y * size, size, size);
+                            break;
                         }
                     }
-                    super.paintComponents(g);
-                    super.repaint();
                 }
-                super.paintComponents(g);
-                super.repaint();
+            }
         }
     }
 
